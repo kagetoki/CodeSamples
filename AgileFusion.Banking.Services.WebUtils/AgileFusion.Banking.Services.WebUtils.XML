@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AgileFusion.Banking.Services.WebUtils</name>
+    </assembly>
+    <members>
+        <member name="T:AgileFusion.Banking.Services.WebUtils.ControllerIdAttribute">
+            <summary>
+            Attribute for specifying id of controller
+            </summary>
+        </member>
+        <member name="F:AgileFusion.Banking.Services.WebUtils.ControllerIdAttribute.Value">
+            <summary>
+            Gets string value of controller id
+            </summary>
+        </member>
+        <member name="F:AgileFusion.Banking.Services.WebUtils.ControllerIdAttribute.Guid">
+            <summary>
+            Gets GUID value of controller id
+            </summary>
+        </member>
+        <member name="M:AgileFusion.Banking.Services.WebUtils.ControllerIdAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="guid">Controller id</param>
+        </member>
+        <member name="T:AgileFusion.Banking.Services.WebUtils.Routing.RouteTable">
+            <summary>
+            Class for gathering routes of WebApi controllers
+            and storing them into thread safe table
+            </summary>
+        </member>
+        <member name="P:AgileFusion.Banking.Services.WebUtils.Routing.RouteTable.RegisteredRoutes">
+            <summary>
+            Gets registered routes
+            </summary>
+        </member>
+        <member name="M:AgileFusion.Banking.Services.WebUtils.Routing.RouteTable.Add(AgileFusion.Banking.Services.Models.Route)">
+            <summary>
+            Adds route to table, using "Rel" as it's key
+            </summary>
+            <param name="route"></param>
+        </member>
+        <member name="M:AgileFusion.Banking.Services.WebUtils.Routing.RouteTable.AddRange(System.Collections.Generic.IEnumerable{AgileFusion.Banking.Services.Models.Route})">
+            <summary>
+            Adds routes to table, using "Rel" as a key
+            </summary>
+            <param name="routes"></param>
+        </member>
+        <member name="M:AgileFusion.Banking.Services.WebUtils.Routing.RouteTable.BuildForAssembly(System.Reflection.Assembly)">
+            <summary>
+            Gets all the routes from all the ApiControllers in given assembly
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AgileFusion.Banking.Services.WebUtils.Routing.RouteTable.Item(System.String)">
+            <summary>
+            Gets registered route by it's relation
+            </summary>
+            <param name="relation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AgileFusion.Banking.Services.WebUtils.Routing.RoutingService">
+            <summary>
+            Allows configuring cross-controllers references within deployment bundle.
+            </summary>
+            <remarks>
+            <para>
+            To have multiple instances of the same controllers within single schema we have to distinguish them and be able to configure routes to the right controllers.
+            To make it work we allow to explicitly select all related controller references within single service. Service is used since controller instance is not long-living object
+            and from single controller reference we only can have scheme id for that controller, but not configured instance. so we can't reach second level of referenced controllers from it.
+            But we can reference service instance from controller, so it's more suitable in terms of reaching any other controller in bundle through single service reference.
+            </para>
+            
+            <para>
+            The use case for having multiple bundles(set of instances) within same schema is not very clear since we'll likely change definitionId(in manifest) if breaking change in code will be introduced.
+            So this mechanism is more like optional solution for future use.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:AgileFusion.Banking.Services.WebUtils.Routing.UrlHelper.CreateRoute(System.String,System.Net.Http.HttpMethod,System.String,System.String,System.Boolean)">
+            <summary>
+            Creates the controller action route.
+            </summary>
+            <param name="rel">The relative.</param>
+            <param name="verb">The verb.</param>
+            <param name="controllerDefinitionId">The controller definition id.</param>
+            <param name="routeName">Name of the route.</param>
+            <param name="anonymous">if set to <c>true</c> route allow anonymous access..</param>
+            <returns></returns>
+        </member>
+        <member name="T:AgileFusion.Banking.Services.WebUtils.WebApi.ResponseCompressionAttribute">
+            <summary>
+            Web api response compression attribute.
+            </summary>
+        </member>
+        <member name="M:AgileFusion.Banking.Services.WebUtils.WebApi.ResponseCompressionAttribute.OnActionExecutedAsync(System.Web.Http.Filters.HttpActionExecutedContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
